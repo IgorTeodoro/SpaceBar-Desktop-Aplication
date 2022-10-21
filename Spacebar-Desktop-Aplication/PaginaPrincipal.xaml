@@ -5,12 +5,118 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Spacebar_Desktop_Aplication"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Height="450" 
+        Width="800"
+        WindowStyle="None"
+        >
+    <Window.Resources>
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" StrokeDashArray="1 2" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" StrokeThickness="1"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <Style x:Key="BotaoRedondo" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0" CornerRadius="10" SnapsToDevicePixels="true" Height="29" Width="99">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid Background="#FF242434">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="199*"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+        <Rectangle HorizontalAlignment="Left" Height="373" Margin="316,34,0,0" VerticalAlignment="Top" Width="442" Fill="#FF313160" RadiusX="16.64" RadiusY="16.64"/>
+        <Rectangle HorizontalAlignment="Left" Height="373" Margin="28,34,0,0" VerticalAlignment="Top" Width="266" Fill="#FF313160" RadiusX="24.32" RadiusY="24.32"/>
+        <Image x:Name="img" HorizontalAlignment="Left" Height="150" Margin="573,67,0,0" VerticalAlignment="Top" Width="152"/>
+        <Label x:Name="lblNome" Content="Nome do Usuário&#xD;&#xA;" HorizontalAlignment="Left" Margin="342,67,0,0" VerticalAlignment="Top" Height="26" Foreground="White"/>
+        <Label Content="Gênero&#xD;&#xA;" HorizontalAlignment="Left" Margin="342,111,0,0" VerticalAlignment="Top" Height="24" Foreground="White"/>
+        <Button Style="{DynamicResource BotaoRedondo}"
+            x:Name="btnAceitar" 
+                Content="Aceitar" 
+                HorizontalAlignment="Center" 
+                Margin="0,369,0,0" 
+                VerticalAlignment="Top" 
+                Height="31" 
+                Width="108"
+                FontFamily="Glory" FontWeight="SemiBold" BorderBrush="White" Foreground="White" FontSize="10"
+                
+                >
+            <Button.Background>
+                <SolidColorBrush Color="#FF6AEB77" Opacity="0.69"/>
+            </Button.Background>
+        </Button>
+        <Button 
+            Style="{DynamicResource BotaoRedondo}"
+            x:Name="btnRecusar" 
+            Content="Recusar" 
+            HorizontalAlignment="Left" 
+            Margin="500,371,0,0" 
+            VerticalAlignment="Top">
+            <Button.Background>
+                <SolidColorBrush Color="#FFF54040" Opacity="0.69"/>
+            </Button.Background>
+        </Button>
+        <Button Style="{DynamicResource BotaoRedondo}" 
+                x:Name="btnEspera" 
+                Content="Espera" 
+                HorizontalAlignment="Left" 
+                Margin="647,371,0,0" 
+                VerticalAlignment="Top"
+                TabIndex="2147483641"
+                RenderTransformOrigin="1,1">
+            <Button.Background>
+                <SolidColorBrush Color="#FFFF8B02" Opacity="0.69"/>
+            </Button.Background>
+        </Button>
+        <Rectangle HorizontalAlignment="Left" Height="17" Margin="342,93,0,0" VerticalAlignment="Top" Width="138" Fill="White"/>
+        <Rectangle HorizontalAlignment="Left" Height="17" Margin="342,135,0,0" VerticalAlignment="Top" Width="138" Fill="White"/>
+        <Label Content="Label" HorizontalAlignment="Left" Margin="344,89,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
